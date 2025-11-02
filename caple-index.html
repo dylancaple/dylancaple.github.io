@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>caple.au | Contact</title>
-  <style>
+<style>
     :root {
       --bg: #0b0b0c;
       --stroke: rgba(255, 255, 255, 0.10);
@@ -22,25 +22,14 @@
     body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(65, 164, 255, 0.20), transparent 60%),
-                  radial-gradient(1000px 700px at 120% 20%, rgba(65, 164, 255, 0.12), transparent 60%),
-                  var(--bg);
+      background: var(--bg);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      padding: 0 20px 40px;
+      padding: 0 20px 40px; overflow-x: hidden;
     }
 
     /* Full-bleed top header bar */
-    .topbar {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      background: var(--topbar);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    .topbar { background: var(--topbar); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; left: 0; right: 0; z-index: 100; width: 100%; }
     .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; }
     .brandword { color: #fff; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.2rem); line-height: 1; text-shadow: 0 2px 14px rgba(65,164,255,0.25); }
 
