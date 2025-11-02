@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>caple.au | Contact</title>
-  <style>
+<style>
     :root {
       --bg: #0b0b0c;
       --stroke: rgba(255, 255, 255, 0.10);
@@ -14,6 +14,7 @@
       --brand-strong: #248df2;
       --topbar: #101824;
       --radius: 16px;
+      --gutter: 20px; /* page side padding */
     }
 
     * { box-sizing: border-box; }
@@ -25,13 +26,13 @@
       background: var(--bg); /* simplified solid background */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      padding: 0 20px 60px; /* increased bottom padding for footer spacing */
+      padding: 0 var(--gutter) 60px; /* use CSS var so header can bleed */ /* increased bottom padding for footer spacing */
       overflow-x: hidden; /* prevent horizontal overflow */
     }
 
     /* Full-width top header bar fix */
     .topbar {
-      width: 100%; /* stretches fully across the page */
+      /* Make the header bleed edge-to-edge, ignoring body padding */
       background: var(--topbar);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       position: sticky;
@@ -39,6 +40,9 @@
       left: 0;
       right: 0;
       z-index: 100;
+      margin-left: calc(var(--gutter) * -1);
+      margin-right: calc(var(--gutter) * -1);
+      width: calc(100% + var(--gutter) * 2);
     }
 
     .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; }
