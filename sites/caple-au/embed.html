@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>caple.au</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    /* Reset and layout */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #0b0c0e;
+      color: #e8eaed;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    .wrap {
+      position: fixed;
+      inset: 0;
+    }
+    iframe.site {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+
+    /* Loader */
+    .loader {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      gap: 16px;
+      background:
+        radial-gradient(1200px 800px at 50% -10%, rgba(255,255,255,0.05), transparent 60%) ,
+        #0b0c0e;
+      transition: opacity .25s ease;
+      z-index: 2;
+    }
+    .loader.hidden { opacity: 0; pointer-events: none; }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.25);
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hint {
+      font-size: 14px;
+      opacity: 0.8;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    /* Fallback notice if framing is blocked or times out */
+    .fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      background: #0b0c0e;
+      z-index: 3;
+    }
+    .fallback.show { display: grid; }
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: #111318;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .card h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .card p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+      color: #c7cad1;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #1a1f27;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn:hover { background: #232935; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="loader" class="loader" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="hint">Loading the site…</div>
+    </div>
+
+    <div id="fallback" class="fallback" aria-live="polite">
+      <div class="card">
+        <h1>Unable to display the site here</h1>
+        <p>
+          It looks like the source has blocked loading inside a frame or is taking too long to respond.
+          You can open it directly instead.
+        </p>
+        <a class="btn" href="https://dylancaple.github.io/sites/caple-au/index.html" rel="noopener">Open the site</a>
+      </div>
+    </div>
+
+    <iframe
+      id="site"
+      class="site"
+      title="caple.au"
+      src="https://dylancaple.github.io/sites/caple-au/index.html"
+      allow="fullscreen; clipboard-read; clipboard-write"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <script>
+    (function () {
+      const iframe = document.getElementById('site');
+      const loader = document.getElementById('loader');
+      const fallback = document.getElementById('fallback');
+
+      // Hide the loader once the frame reports loaded
+      iframe.addEventListener('load', function () {
+        loader.classList.add('hidden');
+        // If content refuses to load, some browsers still fire load to an error page.
+        // A tiny delay keeps the fade smooth without flashing.
+        setTimeout(() => loader.style.display = 'none', 300);
+      });
+
+      // If nothing loads after a sensible time, show a graceful fallback
+      const TIMEOUT_MS = 6000;
+      const timeout = setTimeout(function () {
+        // If the document inside the iframe did not paint or was blocked by frame-ancestors or X-Frame-Options
+        // the loader would still be visible at this point. Show the fallback.
+        if (!loader.classList.contains('hidden')) {
+          loader.classList.add('hidden');
+          fallback.classList.add('show');
+        }
+      }, TIMEOUT_MS);
+
+      // Clean up if load succeeds in time
+      iframe.addEventListener('load', function () {
+        clearTimeout(timeout);
+      });
+
+      // Keep iframe sized to the viewport. CSS handles this, but this guards against mobile oddities.
+      function resize() {
+        iframe.style.height = window.innerHeight + 'px';
+      }
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+    })();
+  </script>
+
+  <noscript>
+    <div style="padding:16px;color:#e8eaed;background:#111318">
+      This page embeds an external site. Please enable JavaScript for the best experience.
+    </div>
+  </noscript>
+</body>
+</html>
