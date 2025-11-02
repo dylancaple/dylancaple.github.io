@@ -1,110 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caple.au | Contact</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>caple.au | Contact</title>
   <style>
-    body {
-      margin: 0;
-      font-family: "Inter", Arial, sans-serif;
-      background: #0d0d0d;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
+    :root {
+      --bg: #0b0b0c;
+      --card: rgba(255, 255, 255, 0.06);
+      --stroke: rgba(255, 255, 255, 0.10);
+      --text: #ffffff;
+      --muted: #b9c1cc;
+      --brand: #41a4ff;           /* DCME accent */
+      --brand-strong: #248df2;
+      --topbar: #101824;          /* Solid header bar colour */
+      --radius: 16px;
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      letter-spacing: 1px;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(65, 164, 255, 0.20), transparent 60%),
+                  radial-gradient(1000px 700px at 120% 20%, rgba(65, 164, 255, 0.12), transparent 60%),
+                  var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 0 20px 40px;
+    }
+
+    /* Full-bleed top header bar */
+    .topbar {
+      width: 100vw;                 /* span edge to edge */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      background: var(--topbar);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .brandword {
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.2rem);
+      line-height: 1;
+      text-shadow: 0 2px 14px rgba(65,164,255,0.25);
+    }
+
+    .wrap { max-width: 1200px; margin: 0 auto; }
+
+    header { text-align: center; margin: 96px 0 48px; }
+    h1 { font-size: clamp(1.6rem, 1.4rem + 1vw, 2.2rem); margin: 0 0 10px; letter-spacing: 0.5px; }
+    .sub { color: var(--muted); font-size: 0.95rem; }
+
+    /* Responsive grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;                    /* extra spacing per your request */
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 2rem;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      transition: transform 0.3s ease;
+      position: relative;
+      display: flex; flex-direction: column;
+      min-height: 360px;            /* slightly taller to balance larger logos */
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      backdrop-filter: blur(6px);
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(65,164,255,0.35); box-shadow: 0 18px 36px rgba(36,141,242,0.18); }
+
+    /* Logo area: never crop, scale smartly */
+    .brand-mark {
+      display: grid; place-items: center;
+      height: 112px;                /* larger to suit square marks */
+      margin-bottom: 12px;
+      border-radius: 12px;
+      padding: 6px;                 /* prevent edge clipping */
+    }
+    .brand-mark img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto; height: auto;
+      object-fit: contain;          /* preserve full logo */
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.45));
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    /* Initials avatar if no logo */
+    .initials {
+      display: grid; place-items: center;
+      width: 84px; height: 84px;    /* larger for visual parity */
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(65,164,255,0.25), rgba(65,164,255,0.05));
+      border: 1px solid var(--stroke);
+      font-weight: 800; letter-spacing: 0.8px; font-size: 1.1rem;
     }
 
-    .logo {
-      max-width: 180px;
-      margin-bottom: 1rem;
-    }
+    .name { font-weight: 800; font-size: 1.08rem; margin: 6px 0 4px; }
+    .meta { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
 
-    .info {
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
+    .spacer { flex: 1; }
 
-    .button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      background: #41a4ff;
-      color: #fff;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.3s ease;
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 14px; border-radius: 10px; font-weight: 700; text-decoration: none;
+      color: #0c1b28; background: var(--brand);
+      box-shadow: 0 8px 18px rgba(65, 164, 255, 0.25);
+      transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
     }
+    .btn:hover { background: var(--brand-strong); transform: translateY(-1px); box-shadow: 0 12px 22px rgba(36, 141, 242, 0.28); }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { outline: 2px solid rgba(65, 164, 255, 0.6); outline-offset: 2px; }
 
-    .button:hover {
-      background: #3393e6;
-    }
+    footer { text-align: center; margin-top: 44px; color: var(--muted); font-size: 0.9rem; }
 
-    footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #aaa;
+    @media (max-width: 380px) {
+      .card { min-height: 320px; padding: 18px; }
+      .brand-mark { height: 96px; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <h1>Contact Us</h1>
-
-  <div class="card">
-    <div class="info">
-      <strong>Dylan Caple</strong><br />
-      hello@dylancaple.com.au<br />
-      +61 2 8000 9101
+  <!-- Top brand bar, white text on coloured bar, left aligned -->
+  <div class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="brandword" aria-label="Caple dot au">Caple.au</div>
     </div>
-    <a href="https://dylancaple.com.au/contact" class="button" target="_blank">Website</a>
   </div>
 
-  <div class="card">
-    <img src="https://dcmedigital.com.au/storage/2025/02/DCME-WHITE-VERYBRIGHT.png" alt="DCME Logo" class="logo" />
-    <div class="info">
-      <strong>DCME</strong><br />
-      info@dcmedigital.com<br />
-      +61 2 8000 9100
-    </div>
-    <a href="https://dcmedigital.com.au/contact-us" class="button" target="_blank">Website</a>
+  <div class="wrap">
+    <header>
+      <h1>Contact Us</h1>
+      <p class="sub">Quick links to our brands and sites</p>
+    </header>
+
+    <main class="grid" aria-label="Contact cards">
+      <!-- Dylan Caple -->
+      <article class="card" aria-label="Dylan Caple">
+        <div class="brand-mark"><div class="initials">DC</div></div>
+        <div class="name">Dylan Caple</div>
+        <div class="meta">
+          <span class="e" data-u="hello" data-d="dylancaple.com.au">hello [at] dylancaple [dot] com [dot] au</span><br>
+          +61 2 8000 9101
+        </div>
+        <div class="spacer"></div>
+        <div class="actions">
+          <a class="btn" href="https://dylancaple.com.au/contact" target="_blank" rel="noopener">Website</a>
+          <button class="btn email" data-u="hello" data-d="dylancaple.com.au" type="button">Email</button>
+          <a class="btn" href="tel:+61280009101">Call</a>
+        </div>
+      </article>
+
+      <!-- DCME -->
+      <article class="card" aria-label="DCME">
+        <div class="brand-mark"><img src="https://dcmedigital.com.au/storage/2025/02/DCME-WHITE-VERYBRIGHT.png" alt="DCME logo"></div>
+        <div class="name">DCME</div>
+        <div class="meta">
+          <span class="e" data-u="info" data-d="dcmedigital.com">info [at] dcmedigital [dot] com</span><br>
+          +61 2 8000 9100
+        </div>
+        <div class="spacer"></div>
+        <div class="actions">
+          <a class="btn" href="https://dcmedigital.com.au/contact-us" target="_blank" rel="noopener">Website</a>
+          <button class="btn email" data-u="info" data-d="dcmedigital.com" type="button">Email</button>
+          <a class="btn" href="tel:+61280009100">Call</a>
+        </div>
+      </article>
+
+      <!-- Elegant Elements -->
+      <article class="card" aria-label="Elegant Elements">
+        <div class="brand-mark"><img src="https://elegantelements.com.au/wp-content/uploads/2024/05/Elegant-Elements-Sydney-Australia.png" alt="Elegant Elements logo"></div>
+        <div class="name">Elegant Elements</div>
+        <div class="meta">
+          <span class="e" data-u="hello" data-d="elegantelements.com.au">hello [at] elegantelements [dot] com [dot] au</span><br>
+          +61 2 9071 7102
+        </div>
+        <div class="spacer"></div>
+        <div class="actions">
+          <a class="btn" href="https://elegantelements.com.au/about/contact" target="_blank" rel="noopener">Website</a>
+          <button class="btn email" data-u="hello" data-d="elegantelements.com.au" type="button">Email</button>
+          <a class="btn" href="tel:+61290717102">Call</a>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      © 2025 caple.au<br>
+      ABN 89 899 899 899<br>
+      PO Box 50, Sydney NSW 2000
+    </footer>
   </div>
 
-  <div class="card">
-    <img src="https://elegantelements.com.au/wp-content/uploads/2024/05/Elegant-Elements-Sydney-Australia.png" alt="Elegant Elements Logo" class="logo" />
-    <div class="info">
-      <strong>Elegant Elements</strong><br />
-      hello@elegantelements.com.au<br />
-      +61 2 9071 7102
-    </div>
-    <a href="https://elegantelements.com.au/about/contact" class="button" target="_blank">Website</a>
-  </div>
-
-  <footer>© 2025 Caple.au</footer>
+  <script>
+    // Build mailto on click to avoid static email addresses in HTML for scrapers
+    document.querySelectorAll('.btn.email').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var u = this.getAttribute('data-u');
+        var d = this.getAttribute('data-d');
+        var addr = u + '@' + d;
+        window.location.href = 'mailto:' + addr;
+      });
+    });
+    // Optionally de-obfuscate visible text on load for real users
+    (function(){
+      var spans = document.querySelectorAll('.meta .e');
+      spans.forEach(function(s){
+        var u = s.getAttribute('data-u');
+        var d = s.getAttribute('data-d');
+        s.textContent = u + ' @ ' + d; // human-friendly, still generated via JS
+      });
+    })();
+  </script>
 </body>
 </html>
