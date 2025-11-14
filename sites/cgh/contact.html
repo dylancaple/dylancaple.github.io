@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact CGH Operations Pty Ltd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="https://dcme.site/uploads/cgh.png" alt="CGH logo">
+        </a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Contact CGH Operations</h1>
+      <p>
+        Reach out to the CGH Operations team for group level enquiries, partnerships and brand opportunities across our
+        media, entertainment and creative businesses.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact layout -->
+  <main>
+    <section>
+      <div class="container contact-layout">
+        <!-- Contact details -->
+        <div class="contact-card">
+          <h2>Contact Details</h2>
+          <p>
+            For general enquiries about CGH Operations or to be directed to one of our brands, please use the details below.
+          </p>
+          <ul class="contact-details">
+            <li>
+              <span class="label">Email</span>
+              <a href="mailto:hello@cghoperations.com.au">hello@cghoperations.com.au</a>
+            </li>
+            <li>
+              <span class="label">Phone</span>
+              <a href="tel:+611300000000">1300 000 000</a>
+            </li>
+            <li>
+              <span class="label">Address</span>
+              123 Example Street, Sydney NSW 2000
+            </li>
+            <li>
+              <span class="label">ABN</span>
+              12 345 678 901
+            </li>
+            <li>
+              <span class="label">Brands</span>
+              DC Media and Entertainment · Elegant Elements · Broadcast Operations by DCME · Escape Artists
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact form -->
+        <div class="contact-card contact-form">
+          <h2>Send a Message</h2>
+          <p>Please complete the form and the CGH Operations team will be in touch.</p>
+
+          <!-- Replace action with your form handler if needed -->
+          <form action="#" method="post" novalidate>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> CGH Operations Pty Ltd. All rights reserved.</span>
+      <span>123 Example Street, Sydney NSW 2000 · ABN 12 345 678 901</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
