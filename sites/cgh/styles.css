@@ -337,7 +337,7 @@ body {
   .hero-title {
     font-size: 2rem;
   }
-
+ 
   .contact-layout {
     grid-template-columns: minmax(0, 1fr);
   }
