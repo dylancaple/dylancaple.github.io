@@ -236,7 +236,11 @@ body {
   gap: 2.5rem;
   padding: 3rem 0;
 }
-
+.brands {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .contact-card {
   padding: 1.5rem;
   border-radius: 16px;
